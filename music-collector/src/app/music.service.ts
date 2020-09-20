@@ -16,8 +16,6 @@ export class MusicService {
 
   constructor(private http: HttpClient) { }
 
-
-
   public retrieveAlbumsFromDB() {
     const URL = this.BASE_URL + '/albums/all';
     let albumList: Album[] = [];
@@ -42,8 +40,13 @@ export class MusicService {
     return albumList;
   }
 
-  public getAllAlbums() {
+  public albumListStream() {
     return this.albumListObservable.asObservable();
+  }
+
+  public deleteAlbum(albumID: string){
+    const URL = this.BASE_URL + '/album/' + albumID;
+    return this.http.delete(URL);
   }
 
 }

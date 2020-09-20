@@ -1,0 +1,29 @@
+.loading-spinner {
+    margin: 20px;
+    align-self: center;
+}
+
+.album-container {
+    margin-top: 15px;
+    /*margin-left: 20px; */
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 100px;
+}
+
+.album-container * {
+    margin-left: 20px;
+}
+
+.add-button {
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+}
+
+.delete-button {
+    position: relative;
+    right: 10px;
+    top: 25px;
+}

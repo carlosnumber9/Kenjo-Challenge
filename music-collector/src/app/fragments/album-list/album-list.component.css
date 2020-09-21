@@ -1,3 +1,4 @@
+
 .loading-spinner {
     margin: 20px;
     align-self: center;
@@ -28,12 +29,29 @@
     top: 25px;
 }
 
-.album-tile * {
+.album-tile *:not(.tile-bg) {
     opacity: 0;
     transition: all 0.5s ease-in-out;
 }
 
-.album-tile:hover * {
+.album-tile:hover *:not(.tile-bg) {
     opacity: 1;
     transition: all 0.5s ease-in-out;
+}
+
+.album-tile:hover .tile-bg {
+    filter: blur(3px);
+    transition: all 0.5s ease-in-out;
+}
+
+.tile-bg {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.album-title-container {
+    background-color: rgba(255, 255, 255, 0.5);
 }

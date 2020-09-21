@@ -8,17 +8,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlbumListComponent } from './fragments/album-list/album-list.component';
 import { DeleteDialogComponent } from './fragments/delete-dialog/delete-dialog.component';
+import { AddAlbumDialogComponent } from './fragments/add-album-dialog/add-album-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlbumListComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    AddAlbumDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,11 @@ import { DeleteDialogComponent } from './fragments/delete-dialog/delete-dialog.c
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

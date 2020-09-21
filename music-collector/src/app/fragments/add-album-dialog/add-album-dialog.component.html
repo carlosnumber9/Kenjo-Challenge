@@ -1,0 +1,26 @@
+<h1 mat-dialog-title> New album </h1>
+<div class="add-form">
+    <mat-form-field appearance="fill">
+      <mat-label> Title </mat-label>
+      <input matInput [(ngModel)]="albumToCreate.title">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label> Release year </mat-label>
+        <input matInput [(ngModel)]="albumToCreate.year">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label> Genre </mat-label>
+      <mat-select (selectionChange)=setGenre($event)>
+        <mat-option *ngFor="let genre of genreOptions" [value]="genre"> {{ genre }} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label> Album cover URL </mat-label>
+        <input matInput [(ngModel)]="albumToCreate.coverUrl">
+    </mat-form-field>
+</div>
+<button mat-button (click)="closeDialog(true)"> Create </button>
+<button mat-button (click)="closeDialog(false)"> Cancel </button>

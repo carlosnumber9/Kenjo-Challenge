@@ -49,4 +49,22 @@ export class MusicService {
     return this.http.delete(URL);
   }
 
+  private parseAlbumForPost(album: Album): Object {
+    let parsedAlbum = {
+      title: album.title,
+      year: album.year,
+      genre: album.genre
+    };
+
+    if(album.coverUrl) { parsedAlbum['coverUrl'] = album.coverUrl }
+
+    return parsedAlbum;
+  }
+
+  public createAlbum(albumToCreate: Album) {
+    const URL = this.BASE_URL + '/album';
+    let albumForRequest = this.parseAlbumForPost(albumToCreate);
+    return this.http.post(URL, albumForRequest);
+  }
+
 }

@@ -5,10 +5,10 @@ export class Album {
     public artist: Artist;
 
     constructor(
-        public id: string,
-        public title: string,
-        public coverUrl: string,
-        public year: number,
-        public genre: string) {}
+        public id?: string,
+        public title?: string,
+        public coverUrl?: string,
+        public year?: number,
+        public genre?: string) {}
 
 }

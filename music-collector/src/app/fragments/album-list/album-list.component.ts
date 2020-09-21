@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Album } from '../../model/album.model';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { AddAlbumDialogComponent } from '../add-album-dialog/add-album-dialog.component';
 
 @Component({
   selector: 'app-album-list',
@@ -51,10 +52,24 @@ export class AlbumListComponent implements OnInit {
         })
       }
     })
-
-
   }
 
+  openAddAlbumDialog():void {
+    let dialogRef = this.dialog.open(AddAlbumDialogComponent);
+
+    dialogRef.afterClosed().subscribe((albumToCreate) => {
+      if(albumToCreate) {
+        this.musicService.createAlbum(albumToCreate).subscribe(() => {
+          this.getAlbumList();
+        })
+      }
+    })
+  }
+
+
+  getAlbumTileBackground(album: Album) {
+    return album.coverUrl ? album.coverUrl : 'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
+  }
 
 
 

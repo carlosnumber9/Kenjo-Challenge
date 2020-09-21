@@ -1,0 +1,26 @@
+
+<div class="loading-spinner" *ngIf="!loaded"> 
+    <mat-spinner ></mat-spinner>
+    <span> Loading albums... </span>
+</div>
+<div *ngIf="loaded">
+    <p *ngIf="!albumList.length"> There are no albums in database yet. </p>
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile class="album-tile" *ngFor="let album of albumList">
+            <img class="tile-bg" src="{{ getAlbumTileBackground(album) }}">
+            <div class="album-title-container">
+                <h2> {{ album.title }} | {{ album.year }} </h2> 
+            </div>
+            <span class="delete-button" (click)="openDeleteAlbumDialog(album)">
+                <mat-icon > delete_forever </mat-icon>
+            </span>
+            <span class="edit-button" (click)="openEditAlbumDialog(album)">
+                <mat-icon > edit </mat-icon>
+            </span>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <button mat-fab class="add-button" (click)="openAddAlbumDialog()">
+        <mat-icon> library_add </mat-icon>
+    </button>
+</div>

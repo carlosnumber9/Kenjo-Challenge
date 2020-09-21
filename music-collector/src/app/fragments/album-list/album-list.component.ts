@@ -54,6 +54,24 @@ export class AlbumListComponent implements OnInit {
     })
   }
 
+  openEditAlbumDialog(album: Album): void {
+    let dialogRef = this.dialog.open(
+      AddAlbumDialogComponent,
+      {
+        data: {
+          album: album
+        }
+      });
+
+    dialogRef.afterClosed().subscribe((albumToUpdate) => {
+      if (albumToUpdate) {
+        this.musicService.updateAlbum(album).subscribe(() => {
+          this.getAlbumList();
+        })
+      }
+    })
+  }
+
   openAddAlbumDialog():void {
     let dialogRef = this.dialog.open(AddAlbumDialogComponent);
 
@@ -68,7 +86,9 @@ export class AlbumListComponent implements OnInit {
 
 
   getAlbumTileBackground(album: Album) {
-    return album.coverUrl ? album.coverUrl : 'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
+    return album.coverUrl ? 
+      album.coverUrl : 
+      'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
   }
 
 

@@ -49,7 +49,7 @@ export class MusicService {
     return this.http.delete(URL);
   }
 
-  private parseAlbumForPost(album: Album): Object {
+  private parseAlbumForRequest(album: Album): Object {
     let parsedAlbum = {
       title: album.title,
       year: album.year,
@@ -63,8 +63,14 @@ export class MusicService {
 
   public createAlbum(albumToCreate: Album) {
     const URL = this.BASE_URL + '/album';
-    let albumForRequest = this.parseAlbumForPost(albumToCreate);
+    let albumForRequest = this.parseAlbumForRequest(albumToCreate);
     return this.http.post(URL, albumForRequest);
+  }
+
+  public updateAlbum(albumToUpdate: Album) {
+    const URL = this.BASE_URL + '/album/' + albumToUpdate.id;
+    let albumForRequest = this.parseAlbumForRequest(albumToUpdate);
+    return this.http.put(URL, albumForRequest);
   }
 
 }

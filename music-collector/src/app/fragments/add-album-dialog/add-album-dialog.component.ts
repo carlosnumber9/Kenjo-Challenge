@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Album } from 'src/app/model/album.model';
 
@@ -10,6 +10,8 @@ import { Album } from 'src/app/model/album.model';
 })
 export class AddAlbumDialogComponent implements OnInit {
 
+  editMode: boolean = false;
+
   title: string = '';
   year: number = undefined;
   genre: string = 'Rock';
@@ -19,7 +21,14 @@ export class AddAlbumDialogComponent implements OnInit {
 
   genreOptions: string[] = ['Rock', 'Pop', 'Soul', 'RAP', 'Country'];
 
-  constructor(public dialogRef: MatDialogRef<AddAlbumDialogComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<AddAlbumDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
+      if(data) {
+        this.editMode = true;
+        this.albumToCreate = data.album;
+      }
+    }
 
   ngOnInit(): void {
   }
@@ -32,7 +41,7 @@ export class AddAlbumDialogComponent implements OnInit {
     this.dialogRef.close((confirmCreation) ? this.albumToCreate : undefined);
   }
 
-  setGenre(event: EventEmitter<MatSelectChange>) {
+  setGenre(event) {
     this.albumToCreate.genre = event.value;
   }
 

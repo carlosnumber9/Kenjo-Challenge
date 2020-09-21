@@ -6,15 +6,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlbumListComponent } from './fragments/album-list/album-list.component';
+import { DeleteDialogComponent } from './fragments/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlbumListComponent
+    AlbumListComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,9 @@ import { AlbumListComponent } from './fragments/album-list/album-list.component'
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

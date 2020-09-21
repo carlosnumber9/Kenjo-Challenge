@@ -5,13 +5,14 @@
 </div>
 <div *ngIf="loaded">
     <p *ngIf="!albumList.length"> There are no albums in database yet. </p>
-    <div *ngFor="let album of albumList" class="album-container">
-        <h2> {{ album.title }} | {{ album.year }} </h2> 
-        <span class="delete-button" (click)="deleteAlbum(album)">
-            <mat-icon > delete_forever </mat-icon>
-        </span>
-    </div>
+    <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile class="album-tile" *ngFor="let album of albumList">
+            <h2> {{ album.title }} | {{ album.year }} </h2> 
             <span class="delete-button" (click)="openDeleteAlbumDialog(album)">
+                <mat-icon > delete_forever </mat-icon>
+            </span>
+        </mat-grid-tile>
+    </mat-grid-list>
 
     <button mat-fab class="add-button">
         <mat-icon> library_add </mat-icon>

@@ -11,10 +11,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class DeleteDialogComponent {
 
-  albumToDelete: Album;
+  ELEMENT_TYPES = {
+    ARTIST: 'ARTIST',
+    ALBUM: 'ALBUM'
+  }
+  elementName: string;
+  elementType: string;
 
-  constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
-    this.albumToDelete = data.album;
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
+    this.elementName = data.name;
+    this.elementType = data.elementType;
   }
 
   closeDialog(confirmDeletion: boolean): void {

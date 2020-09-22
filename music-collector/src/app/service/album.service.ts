@@ -9,7 +9,7 @@ import { Observable, Subject } from 'rxjs';
 export class AlbumService {
 
   BASE_URL = 'http://localhost:3000';
-  public albumListObservable = new Subject<Album[]>();
+  public listObservable = new Subject<Album[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +21,7 @@ export class AlbumService {
     let albumList: Album[] = [];
     this.http.get(URL).subscribe((albums: Object[]) => {
       albumList = this.convertIntoAlbumList(albums);
-      this.albumListObservable.next(albumList);
+      this.listObservable.next(albumList);
     });
   }
 
@@ -56,7 +56,7 @@ export class AlbumService {
    * Obtains observable for album list changes
    */
   public getListObservable(): Observable<Album[]> {
-    return this.albumListObservable.asObservable();
+    return this.listObservable.asObservable();
   }
 
   /**

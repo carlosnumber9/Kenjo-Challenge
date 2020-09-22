@@ -1,0 +1,19 @@
+<div class="loading-spinner" *ngIf="!loaded">
+  <mat-spinner></mat-spinner>
+  <span> Loading artists... </span>
+</div>
+<div *ngIf="loaded">
+  <p *ngIf="!artistList.length">There are no artists in database yet.</p>
+  <div class="artist-container" *ngFor="let artist of artistList">
+    <h2> {{ artist.name }} </h2>
+    <span class="delete-button" (click)="openDeleteArtistDialog(artist)">
+      <mat-icon> delete_forever </mat-icon>
+    </span>
+    <span class="edit-button" (click)="openEditArtistDialog(artist)">
+      <mat-icon> edit </mat-icon>
+    </span>
+  </div>
+  <button mat-fab class="add-button" (click)="openAddArtistDialog()">
+    <mat-icon> library_add </mat-icon>
+  </button>
+</div>

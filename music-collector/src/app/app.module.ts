@@ -12,19 +12,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlbumListComponent } from './fragments/album-list/album-list.component';
 import { DeleteDialogComponent } from './fragments/delete-dialog/delete-dialog.component';
 import { AddAlbumDialogComponent } from './fragments/add-album-dialog/add-album-dialog.component';
+import { ArtistListComponent } from './fragments/artist-list/artist-list.component';
+import { AddArtistDialogComponent } from './fragments/add-artist-dialog/add-artist-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlbumListComponent,
     DeleteDialogComponent,
-    AddAlbumDialogComponent
+    AddAlbumDialogComponent,
+    ArtistListComponent,
+    AddArtistDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,9 @@ import { AddAlbumDialogComponent } from './fragments/add-album-dialog/add-album-
     MatFormFieldModule,
     FormsModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

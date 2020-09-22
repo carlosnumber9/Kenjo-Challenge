@@ -40,7 +40,8 @@ export class AlbumListComponent implements OnInit {
       DeleteDialogComponent,
       {
         data: {
-          album: album
+          elementType: 'ALBUM',
+          name: album.title
         }
       });
 

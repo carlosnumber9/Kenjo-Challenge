@@ -5,7 +5,7 @@
 </div>
 <div *ngIf="loaded">
     <p *ngIf="!albumList.length"> There are no albums in database yet. </p>
-    <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-list cols="{{ getListColumns() }}" rowHeight="2:1">
         <mat-grid-tile class="album-tile" *ngFor="let album of albumList">
             <img class="tile-bg" src="{{ getAlbumTileBackground(album) }}">
             <div class="album-title-container">

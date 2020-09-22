@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from 'src/app/service/album.service';
 import { MatDialog } from '@angular/material/dialog';
+import { HostListener } from "@angular/core";
 
 
 import { Album } from '../../model/album.model';
@@ -16,12 +17,14 @@ export class AlbumListComponent implements OnInit {
 
   albumList: Album[] = [];
   loaded: boolean = false;
+  columnsNumber: number;
 
   constructor(
     private albumService: AlbumService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.columnsNumber = this.getListColumns();
     this.albumService.getListObservable().subscribe((newAlbumList: Album[]) => {
       this.albumList = newAlbumList;
       this.loaded = true;
@@ -91,6 +94,24 @@ export class AlbumListComponent implements OnInit {
       'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
   }
 
+  getListColumns(): number {
+    let windowWidth = window.innerWidth;
+    if(windowWidth > 1200) {
+      return 4;
+    }
+    if(windowWidth > 800) {
+      return 3;
+    }
+    if(windowWidth > 600) {
+      return 2;
+    }
+    return 1;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  refreshColumnsNumber() {
+      this.columnsNumber = this.getListColumns();
+  }
 
 
 }

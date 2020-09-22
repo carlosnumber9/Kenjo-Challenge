@@ -9,6 +9,18 @@ export class Album {
         public title?: string,
         public coverUrl?: string,
         public year?: number,
-        public genre?: string) {}
+        public genre?: string) { }
+
+    /**
+     * Converts album to raw object for request
+     */
+    toRequestObject(): Object {
+        return {
+            title: this.title,
+            year: this.year,
+            genre: this.genre,
+            coverUrl: this.coverUrl ? this.coverUrl : undefined
+        };
+    }
 
 }

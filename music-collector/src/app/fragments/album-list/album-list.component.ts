@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from 'src/app/music.service';
+import { AlbumService } from 'src/app/service/album.service';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -18,13 +18,12 @@ export class AlbumListComponent implements OnInit {
   loaded: boolean = false;
 
   constructor(
-    private musicService: MusicService,
+    private albumService: AlbumService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.musicService.albumListStream().subscribe((newAlbumList: Album[]) => {
+    this.albumService.getListObservable().subscribe((newAlbumList: Album[]) => {
       this.albumList = newAlbumList;
-      console.debug('Album list refresh', this.albumList);
       this.loaded = true;
     });
     this.getAlbumList();
@@ -33,7 +32,7 @@ export class AlbumListComponent implements OnInit {
   getAlbumList(): void  {
     this.loaded = false;
     this.albumList = [];
-    this.musicService.retrieveAlbumsFromDB();
+    this.albumService.getAll();
   }
 
   openDeleteAlbumDialog(album: Album): void {
@@ -47,7 +46,7 @@ export class AlbumListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((deletionConfirmed) => {
       if (deletionConfirmed) {
-        this.musicService.deleteAlbum(album.id).subscribe(() => {
+        this.albumService.delete(album.id).subscribe(() => {
           this.getAlbumList();
         })
       }
@@ -65,7 +64,7 @@ export class AlbumListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((albumToUpdate) => {
       if (albumToUpdate) {
-        this.musicService.updateAlbum(album).subscribe(() => {
+        this.albumService.update(album).subscribe(() => {
           this.getAlbumList();
         })
       }
@@ -77,7 +76,7 @@ export class AlbumListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((albumToCreate) => {
       if(albumToCreate) {
-        this.musicService.createAlbum(albumToCreate).subscribe(() => {
+        this.albumService.create(albumToCreate).subscribe(() => {
           this.getAlbumList();
         })
       }

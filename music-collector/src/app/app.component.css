@@ -1,11 +1,31 @@
+.full-window {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100%;
+}
+
+.left-side {
+    width: 20%;
+    background-image: url('../assets/img/microphone.jpg');
+    background-size: auto 100%;
+}
+
+.right-side {
+    width: 20%;
+    background-image: url('../assets/img/guitar.jpg');
+    background-size: auto 100%;
+}
+
+
+.main {
+    width: 60%;
+    border: 1px solid black;
+    min-height: 100%;
+}
+
+
 h1 { 
     margin: 20px;
     text-align: center;
-}
-
-.main {
-    max-width: 80%;
-    margin: auto;
-    border: 1px solid black;
-    min-height: 100%;
 }

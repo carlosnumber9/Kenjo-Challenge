@@ -1,10 +1,11 @@
 
 <div class="loading-spinner" *ngIf="!loaded"> 
     <mat-spinner ></mat-spinner>
+    <br>
     <span> Loading albums... </span>
 </div>
 <div *ngIf="loaded">
-    <p *ngIf="!albumList.length"> {{ noDataMessage }} </p>
+    <p *ngIf="!albumList.length" class="no-data-message"> {{ noDataMessage }} </p>
     <mat-grid-list cols="{{ getListColumns() }}" rowHeight="2:1">
         <mat-grid-tile class="album-tile" *ngFor="let album of albumList">
             <img class="tile-bg" src="{{ getAlbumTileBackground(album) }}">

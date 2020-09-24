@@ -1,8 +1,11 @@
 .loading-spinner {
-    margin: 20px;
-    align-self: center;
+    text-align: center;
+    margin-top: 35px;
 }
 
+.loading-spinner * {
+    display: inline-block;
+}
 .artist-container {
     margin-top: 15px;
     margin-left: 20px;
@@ -26,4 +29,9 @@
     position: relative;
     right: 10px;
     top: 25px;
+}
+
+.no-data-message {
+    margin-top: 35px;
+    text-align: center;
 }

@@ -1,9 +1,10 @@
 <div class="loading-spinner" *ngIf="!loaded">
   <mat-spinner></mat-spinner>
+  <br>
   <span> Loading artists... </span>
 </div>
 <div *ngIf="loaded">
-  <p *ngIf="!artistList.length"> {{ noDataMessage }} </p>
+  <p *ngIf="!artistList.length" class="no-data-message"> {{ noDataMessage }} </p>
   <div class="artist-container" *ngFor="let artist of artistList">
     <h2> {{ artist.name }} </h2>
     <span class="delete-button" (click)="openDeleteArtistDialog(artist)">

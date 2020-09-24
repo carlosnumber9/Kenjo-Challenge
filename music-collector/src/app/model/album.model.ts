@@ -19,7 +19,8 @@ export class Album {
             title: this.title,
             year: this.year,
             genre: this.genre,
-            coverUrl: this.coverUrl ? this.coverUrl : undefined
+            coverUrl: this.coverUrl ? this.coverUrl : undefined,
+            artistId: this.artist ? this.artist.id : undefined
         };
     }
 

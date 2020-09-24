@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Album } from 'src/app/model/album.model';
+import { Artist } from 'src/app/model/artist.model';
+import { ArtistService } from 'src/app/service/artist.service';
 
 @Component({
   selector: 'app-add-album-dialog',
@@ -15,6 +17,8 @@ export class AddAlbumDialogComponent {
   year: number = undefined;
   genre: string = 'Rock';
   coverUrl: string = '';
+  artistListLoaded: boolean;
+  artistList: Artist[];
 
   albumToCreate: Album = new Album();
 
@@ -22,11 +26,13 @@ export class AddAlbumDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddAlbumDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private artistService: ArtistService) { 
       if(data) {
         this.editMode = true;
         this.albumToCreate = data.album;
       }
+      this.getArtistList();
     }
 
   closeDialog(confirmCreation: boolean): void {
@@ -35,6 +41,23 @@ export class AddAlbumDialogComponent {
 
   setGenre(event: any): void {
     this.albumToCreate.genre = event.value;
+  }
+
+  getArtistList(): void {
+    this.artistService.getListObservable().subscribe((response: any) => {
+      if('status' in response) {
+        this.artistListLoaded = false;      
+      }
+      else {
+        this.artistList = response;
+       this.artistListLoaded = (this.artistList.length > 0);
+      }
+    });
+    this.artistService.getAll();
+  }
+
+  setArtist(event: any): void {
+    this.albumToCreate.artist = event.value;
   }
 
 }

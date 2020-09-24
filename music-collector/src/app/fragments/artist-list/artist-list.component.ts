@@ -14,14 +14,21 @@ export class ArtistListComponent implements OnInit {
 
   artistList: Artist[] = [];
   loaded: boolean = false;
+  noDataMessage: string;
 
   constructor(
     private artistService: ArtistService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.artistService.getListObservable().subscribe((newArtistList: Artist[]) => {
-      this.artistList = newArtistList;
+    this.artistService.getListObservable().subscribe((response: any) => {
+      if('status' in response) {
+        this.noDataMessage = 'There was an error trying to retrieve artists from database.';
+      }
+      else {
+        this.artistList = response;
+        this.noDataMessage = 'There are no artists in database yet.';
+      }
       this.loaded = true;
     });
     this.getArtistList();

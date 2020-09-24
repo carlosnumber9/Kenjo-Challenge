@@ -3,7 +3,7 @@
   <span> Loading artists... </span>
 </div>
 <div *ngIf="loaded">
-  <p *ngIf="!artistList.length">There are no artists in database yet.</p>
+  <p *ngIf="!artistList.length"> {{ noDataMessage }} </p>
   <div class="artist-container" *ngFor="let artist of artistList">
     <h2> {{ artist.name }} </h2>
     <span class="delete-button" (click)="openDeleteArtistDialog(artist)">

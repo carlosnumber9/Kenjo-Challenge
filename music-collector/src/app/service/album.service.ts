@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../model/album.model';
 import { Observable, Subject } from 'rxjs';
 
@@ -22,6 +22,8 @@ export class AlbumService {
     this.http.get(URL).subscribe((albums: Object[]) => {
       albumList = this.convertIntoAlbumList(albums);
       this.listObservable.next(albumList);
+    }, error => {
+      this.listObservable.next(error);
     });
   }
 

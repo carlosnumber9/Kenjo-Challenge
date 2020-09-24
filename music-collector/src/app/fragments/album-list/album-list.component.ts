@@ -18,6 +18,7 @@ export class AlbumListComponent implements OnInit {
   albumList: Album[] = [];
   loaded: boolean = false;
   columnsNumber: number;
+  noDataMessage: string;
 
   constructor(
     private albumService: AlbumService,
@@ -25,10 +26,16 @@ export class AlbumListComponent implements OnInit {
 
   ngOnInit(): void {
     this.columnsNumber = this.getListColumns();
-    this.albumService.getListObservable().subscribe((newAlbumList: Album[]) => {
-      this.albumList = newAlbumList;
+    this.albumService.getListObservable().subscribe((response: any) => {
+      if('status' in response) {
+        this.noDataMessage = 'There was an error trying to retrieve albums from database.';
+      }
+      else {
+        this.albumList = response;
+        this.noDataMessage = 'There are no albums in database yet.';  
+      }
       this.loaded = true;
-    });
+      });
     this.getAlbumList();
   }
 

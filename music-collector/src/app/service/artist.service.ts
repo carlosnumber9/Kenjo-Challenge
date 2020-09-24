@@ -22,6 +22,8 @@ export class ArtistService {
     this.http.get(URL).subscribe((artists: Object[]) => {
       artistList = this.convertIntoArtistList(artists);
       this.listObservable.next(artistList);
+    }, error => {
+      this.listObservable.next(error);
     });
   }
 

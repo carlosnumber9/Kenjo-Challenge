@@ -89,4 +89,12 @@ export class ArtistListComponent implements OnInit {
     })
   }
 
+  getTimeRange(artist: Artist): string {
+    let birthYear = artist.birthdate.getFullYear();
+    if(artist.deathDate) {
+      return birthYear + ' - ' + artist.deathDate.getFullYear();
+    }
+    return birthYear.toString();
+  }
+
 }

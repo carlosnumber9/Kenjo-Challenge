@@ -5,15 +5,45 @@
 </div>
 <div *ngIf="loaded">
   <p *ngIf="!artistList.length" class="no-data-message"> {{ noDataMessage }} </p>
-  <div class="artist-container" *ngFor="let artist of artistList">
-    <h2> {{ artist.name }} </h2>
-    <span class="delete-button" (click)="openDeleteArtistDialog(artist)">
-      <mat-icon> delete_forever </mat-icon>
-    </span>
-    <span class="edit-button" (click)="openEditArtistDialog(artist)">
-      <mat-icon> edit </mat-icon>
-    </span>
+  <mat-expansion-panel hideToggle *ngFor="let artist of artistList">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ artist.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ getTimeRange(artist) }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="detail-container">
+      <div class="info-column">
+          <br>
+          <p> Start date/Birthdate: {{ artist.birthdate | date: 'dd/MM/yyyy'}} </p> 
+          <p *ngIf="artist.deathDate"> End date/Death date: {{ artist.deathDate | date: 'dd/MM/yyyy'}} </p>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="edit-buttons">
+              <button 
+                  mat-icon-button 
+                  (click)="openDeleteArtistDialog(artist)">
+                  <mat-icon> delete_forever </mat-icon>
+              </button>
+              <button 
+                  mat-icon-button 
+                  (click)="openEditArtistDialog(artist)">
+                  <mat-icon> edit </mat-icon>
+              </button>
+          </div>
+      </div>
+      <mat-divider [vertical]="true" class="divider"></mat-divider>
+      <div class="img-column">
+        <img class="artist-pic" src="{{ artist.photoUrl }}">      
+      </div>
   </div>
+  </mat-expansion-panel>
   <button mat-fab class="add-button" (click)="openAddArtistDialog()">
     <mat-icon> library_add </mat-icon>
   </button>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../model/album.model';
 import { Observable, Subject } from 'rxjs';
+import { Artist } from '../model/artist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +33,17 @@ export class AlbumService {
    * @param rawAlbumObject to convert
    */
   private parse(rawAlbumObject: Object): Album {
-      return new Album(
-        rawAlbumObject['_id'],
-        rawAlbumObject['title'],
-        rawAlbumObject['coverUrl'],
-        rawAlbumObject['year'],
-        rawAlbumObject['genre']
-      );
+
+    let artist = new Artist(rawAlbumObject['artistId']);
+
+    return new Album(
+      rawAlbumObject['_id'],
+      rawAlbumObject['title'],
+      rawAlbumObject['coverUrl'],
+      rawAlbumObject['year'],
+      rawAlbumObject['genre'],
+      artist
+    );
   }
 
   /**
@@ -88,6 +93,12 @@ export class AlbumService {
     const URL = this.BASE_URL + '/album/' + albumToUpdate.id;
     let albumForRequest = albumToUpdate.toRequestObject();
     return this.http.put(URL, albumForRequest);
+  }
+
+  public getAlbumTileBackground(album: Album): string {
+    return album.coverUrl ? 
+      album.coverUrl : 
+      'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
   }
 
 }

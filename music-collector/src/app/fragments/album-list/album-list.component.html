@@ -7,17 +7,14 @@
 <div *ngIf="loaded">
     <p *ngIf="!albumList.length" class="no-data-message"> {{ noDataMessage }} </p>
     <mat-grid-list cols="{{ getListColumns() }}" rowHeight="2:1">
-        <mat-grid-tile class="album-tile" *ngFor="let album of albumList">
+        <mat-grid-tile 
+            class="album-tile" 
+            *ngFor="let album of albumList"
+            (click)="openAlbumDetailDialog(album)">
             <img class="tile-bg" src="{{ getAlbumTileBackground(album) }}">
             <div class="album-title-container">
-                <h2> {{ album.title }} | {{ album.year }} </h2> 
+                <h2> {{ album.title }} </h2> 
             </div>
-            <span class="delete-button" (click)="openDeleteAlbumDialog(album)">
-                <mat-icon > delete_forever </mat-icon>
-            </span>
-            <span class="edit-button" (click)="openEditAlbumDialog(album)">
-                <mat-icon > edit </mat-icon>
-            </span>
         </mat-grid-tile>
     </mat-grid-list>
 

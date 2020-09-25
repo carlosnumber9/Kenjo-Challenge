@@ -8,18 +8,6 @@
     display: inline-block;
 }
 
-.album-container {
-    margin-top: 15px;
-    border: 1px solid black;
-    border-radius: 3px;
-    width: 100%;
-    min-height: 100px;
-}
-
-.album-container * {
-    margin-left: 20px;
-}
-
 .add-button {
     position: fixed;
     right: 20px;
@@ -30,6 +18,10 @@
     position: relative;
     right: 10px;
     top: 25px;
+}
+
+.album-tile {
+    cursor: pointer;
 }
 
 .album-tile *:not(.tile-bg) {
@@ -57,6 +49,8 @@
 
 .album-title-container {
     background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    padding-bottom: 5px !important;
 }
 
 .no-data-message {

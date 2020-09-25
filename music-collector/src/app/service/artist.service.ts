@@ -90,4 +90,9 @@ export class ArtistService {
     return this.http.put(URL, artistForRequest);
   }
 
+  public findById(artistId: string) {
+    const URL = this.BASE_URL + '/artist/' + artistId;
+    return this.http.get(URL);
+  }
+
 }

@@ -7,6 +7,7 @@ import { HostListener } from "@angular/core";
 import { Album } from '../../model/album.model';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AddAlbumDialogComponent } from '../add-album-dialog/add-album-dialog.component';
+import { AlbumDetailDialogComponent } from '../album-detail-dialog/album-detail-dialog.component';
 
 @Component({
   selector: 'app-album-list',
@@ -45,43 +46,6 @@ export class AlbumListComponent implements OnInit {
     this.albumService.getAll();
   }
 
-  openDeleteAlbumDialog(album: Album): void {
-    let dialogRef = this.dialog.open(
-      DeleteDialogComponent,
-      {
-        data: {
-          elementType: 'ALBUM',
-          name: album.title
-        }
-      });
-
-    dialogRef.afterClosed().subscribe((deletionConfirmed) => {
-      if (deletionConfirmed) {
-        this.albumService.delete(album.id).subscribe(() => {
-          this.getAlbumList();
-        })
-      }
-    })
-  }
-
-  openEditAlbumDialog(album: Album): void {
-    let dialogRef = this.dialog.open(
-      AddAlbumDialogComponent,
-      {
-        data: {
-          album: album
-        }
-      });
-
-    dialogRef.afterClosed().subscribe((albumToUpdate) => {
-      if (albumToUpdate) {
-        this.albumService.update(album).subscribe(() => {
-          this.getAlbumList();
-        })
-      }
-    })
-  }
-
   openAddAlbumDialog():void {
     let dialogRef = this.dialog.open(AddAlbumDialogComponent);
 
@@ -96,17 +60,12 @@ export class AlbumListComponent implements OnInit {
 
 
   getAlbumTileBackground(album: Album) {
-    return album.coverUrl ? 
-      album.coverUrl : 
-      'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
+    return this.albumService.getAlbumTileBackground(album);
   }
 
   getListColumns(): number {
     let windowWidth = window.innerWidth;
     if(windowWidth > 1200) {
-      return 4;
-    }
-    if(windowWidth > 800) {
       return 3;
     }
     if(windowWidth > 600) {
@@ -118,6 +77,20 @@ export class AlbumListComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   refreshColumnsNumber() {
       this.columnsNumber = this.getListColumns();
+  }
+
+  openAlbumDetailDialog(album: Album): void {
+    let dialogRef = this.dialog.open(AlbumDetailDialogComponent, {
+      data: {
+        album: album
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((albumWasDeleted) => {
+      if(albumWasDeleted) {
+        this.getAlbumList();
+      }
+    })
   }
 
 

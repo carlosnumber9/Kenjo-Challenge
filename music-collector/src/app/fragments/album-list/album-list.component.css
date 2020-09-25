@@ -1,20 +1,11 @@
 
 .loading-spinner {
-    margin: 20px;
-    align-self: center;
+    text-align: center;
+    margin-top: 35px;
 }
 
-.album-container {
-    margin-top: 15px;
-    /*margin-left: 20px; */
-    border: 1px solid black;
-    border-radius: 3px;
-    width: 100%;
-    min-height: 100px;
-}
-
-.album-container * {
-    margin-left: 20px;
+.loading-spinner * {
+    display: inline-block;
 }
 
 .add-button {
@@ -27,6 +18,10 @@
     position: relative;
     right: 10px;
     top: 25px;
+}
+
+.album-tile {
+    cursor: pointer;
 }
 
 .album-tile *:not(.tile-bg) {
@@ -54,4 +49,11 @@
 
 .album-title-container {
     background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    padding-bottom: 5px !important;
+}
+
+.no-data-message {
+    margin-top: 35px;
+    text-align: center;
 }

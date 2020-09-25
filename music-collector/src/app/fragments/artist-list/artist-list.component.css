@@ -1,0 +1,57 @@
+.loading-spinner {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.loading-spinner * {
+    display: inline-block;
+}
+.artist-container {
+    margin-top: 15px;
+    margin-left: 20px;
+    border: 1px solid black;
+    border-radius: 3px;
+    width: 90%;
+    min-height: 100px;
+}
+
+.artist-container * {
+    margin-left: 20px;
+}
+
+.add-button {
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+}
+
+.delete-button {
+    position: relative;
+    right: 10px;
+    top: 25px;
+}
+
+.no-data-message {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.artist-pic {
+    max-height: 230px;
+}
+
+.divider {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.edit-buttons {
+    bottom: 5px;
+}

@@ -1,0 +1,19 @@
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.detail-cover {
+    max-height: 230px;
+}
+
+.divider {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.edit-buttons {
+    bottom: 5px;
+}

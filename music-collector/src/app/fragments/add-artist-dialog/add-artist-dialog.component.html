@@ -1,0 +1,29 @@
+<h1 mat-dialog-title *ngIf="!editMode"> Add an artist </h1>
+<h1 mat-dialog-title *ngIf="editMode"> Edit artist </h1>
+<div class="add-form">
+    <mat-form-field appearance="fill">
+      <mat-label> Name </mat-label>
+      <input matInput [(ngModel)]="artistToCreate.name">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label> Birth date </mat-label>
+        <input matInput [matDatepicker]="birthPicker" [(ngModel)]="artistToCreate.birthdate">
+        <mat-datepicker #birthPicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="birthPicker.open()"> Select date </button>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label> Death date </mat-label>
+        <input matInput [matDatepicker]="deathPicker" [(ngModel)]="artistToCreate.deathDate">
+        <mat-datepicker #deathPicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button (click)="deathPicker.open()"> Select date </button>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label> Artist picture URL </mat-label>
+        <input matInput [(ngModel)]="artistToCreate.photoUrl">
+    </mat-form-field>
+</div>
+<button mat-button (click)="closeDialog(true)"> Save </button>
+<button mat-button (click)="closeDialog(false)"> Cancel </button>

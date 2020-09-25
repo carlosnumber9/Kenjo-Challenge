@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from 'src/app/music.service';
+import { AlbumService } from 'src/app/service/album.service';
 import { MatDialog } from '@angular/material/dialog';
+import { HostListener } from "@angular/core";
 
 
 import { Album } from '../../model/album.model';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { AddAlbumDialogComponent } from '../add-album-dialog/add-album-dialog.component';
+import { AlbumDetailDialogComponent } from '../album-detail-dialog/album-detail-dialog.component';
 
 @Component({
   selector: 'app-album-list',
@@ -16,60 +18,32 @@ export class AlbumListComponent implements OnInit {
 
   albumList: Album[] = [];
   loaded: boolean = false;
+  columnsNumber: number;
+  noDataMessage: string;
 
   constructor(
-    private musicService: MusicService,
+    private albumService: AlbumService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.musicService.albumListStream().subscribe((newAlbumList: Album[]) => {
-      this.albumList = newAlbumList;
-      console.debug('Album list refresh', this.albumList);
+    this.columnsNumber = this.getListColumns();
+    this.albumService.getListObservable().subscribe((response: any) => {
+      if('status' in response) {
+        this.noDataMessage = 'There was an error trying to retrieve albums from database.';
+      }
+      else {
+        this.albumList = response;
+        this.noDataMessage = 'There are no albums in database yet.';  
+      }
       this.loaded = true;
-    });
+      });
     this.getAlbumList();
   }
 
   getAlbumList(): void  {
     this.loaded = false;
     this.albumList = [];
-    this.musicService.retrieveAlbumsFromDB();
-  }
-
-  openDeleteAlbumDialog(album: Album): void {
-    let dialogRef = this.dialog.open(
-      DeleteDialogComponent,
-      {
-        data: {
-          album: album
-        }
-      });
-
-    dialogRef.afterClosed().subscribe((deletionConfirmed) => {
-      if (deletionConfirmed) {
-        this.musicService.deleteAlbum(album.id).subscribe(() => {
-          this.getAlbumList();
-        })
-      }
-    })
-  }
-
-  openEditAlbumDialog(album: Album): void {
-    let dialogRef = this.dialog.open(
-      AddAlbumDialogComponent,
-      {
-        data: {
-          album: album
-        }
-      });
-
-    dialogRef.afterClosed().subscribe((albumToUpdate) => {
-      if (albumToUpdate) {
-        this.musicService.updateAlbum(album).subscribe(() => {
-          this.getAlbumList();
-        })
-      }
-    })
+    this.albumService.getAll();
   }
 
   openAddAlbumDialog():void {
@@ -77,7 +51,7 @@ export class AlbumListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((albumToCreate) => {
       if(albumToCreate) {
-        this.musicService.createAlbum(albumToCreate).subscribe(() => {
+        this.albumService.create(albumToCreate).subscribe(() => {
           this.getAlbumList();
         })
       }
@@ -86,11 +60,38 @@ export class AlbumListComponent implements OnInit {
 
 
   getAlbumTileBackground(album: Album) {
-    return album.coverUrl ? 
-      album.coverUrl : 
-      'https://i1.wp.com/www.furnacemfg.com/wp-content/uploads/2018/12/orange_vinyl.jpg?fit=2218%2C2216&ssl=1';
+    return this.albumService.getAlbumTileBackground(album);
   }
 
+  getListColumns(): number {
+    let windowWidth = window.innerWidth;
+    if(windowWidth > 1200) {
+      return 3;
+    }
+    if(windowWidth > 600) {
+      return 2;
+    }
+    return 1;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  refreshColumnsNumber() {
+      this.columnsNumber = this.getListColumns();
+  }
+
+  openAlbumDetailDialog(album: Album): void {
+    let dialogRef = this.dialog.open(AlbumDetailDialogComponent, {
+      data: {
+        album: album
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((albumWasDeleted) => {
+      if(albumWasDeleted) {
+        this.getAlbumList();
+      }
+    })
+  }
 
 
 }

@@ -1,11 +1,36 @@
-h1 { 
-    margin: 20px;
-    text-align: center;
+.full-window {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100%;
 }
 
+.left-side {
+    width: 20%;
+    background-image: url('../assets/img/microphone.jpg');
+    background-size: auto 100%;
+}
+
+.right-side {
+    width: 20%;
+    background-image: url('../assets/img/guitar.jpg');
+    background-size: auto 100%;
+}
+
+
 .main {
-    max-width: 80%;
-    margin: auto;
+    width: 60%;
     border: 1px solid black;
-    height: 100%;
+    border-bottom: none;
+    min-height: 100%;
+    padding-top: 35px;
+    background-image: url('../assets/img/guitars.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-color: #fcfcfc;
+}
+
+h1 { 
+    text-align: center;
 }

@@ -1,0 +1,33 @@
+<h1 mat-dialog-title *ngIf="album"> {{ album.title }} </h1>
+<div class="detail-container" *ngIf="album">
+    <div class="info-column">
+        <h2> {{ album.artist.name }} </h2>
+        <br>
+        <p> {{ album.year }} </p>
+        <p> {{ album.genre }} </p>
+        <br>
+        <br>
+        <br>
+        <div class="edit-buttons">
+            <button 
+                mat-icon-button 
+                (click)="openDeleteAlbumDialog(album)">
+                <mat-icon> delete_forever </mat-icon>
+            </button>
+            <button 
+                mat-icon-button 
+                (click)="openEditAlbumDialog(album)">
+                <mat-icon> edit </mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-divider [vertical]="true" class="divider"></mat-divider>
+    <div class="img-column">
+        <img class="detail-cover" src="{{ getAlbumTileBackground(album) }}">
+    </div>
+</div>
+
+
+
+
+

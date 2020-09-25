@@ -1,11 +1,17 @@
-
-<div class="main">
-  <h1> Music Collector </h1>
-  <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Albums"> 
-      <app-album-list></app-album-list>
-    </mat-tab>
-    <mat-tab label="Artists"> Artists </mat-tab>
-  </mat-tab-group>
+<div class="full-window">
+  <div class="left-side"></div>
+  <div class="main">
+    <h1>Music Collector</h1>
+    <mat-tab-group 
+      mat-align-tabs="start" 
+      [color]="'accent'">
+      <mat-tab label="Albums">
+        <app-album-list></app-album-list>
+      </mat-tab>
+      <mat-tab label="Artists">
+        <app-artist-list></app-artist-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="right-side"></div>
 </div>
-

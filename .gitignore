@@ -1,1 +1,2 @@
-backend/
+backend/data
+backend/package-lock.json
